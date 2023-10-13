@@ -17,8 +17,8 @@ $ make
 endomorph -f input.txt -o output.txt
 
 Options:
-	-i: specify input file
-	-o: specify output file
+-i: specify input file
+-o: specify output file
 ```
 
 
@@ -50,7 +50,7 @@ Ultimately, all the implemented functions will be accommodated into a static C l
 
 ### Contribution
 
-You contribute to the project in following ways:
+You can contribute to the project in following ways:
 1. Open and/or fix issue(s)
 2. Create pull request(s)
 3. Hit me up on <a href="https://x.com/r0075h3ll" target="_blank">x.com</a> with a new idea
