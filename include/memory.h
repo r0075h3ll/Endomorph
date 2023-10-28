@@ -6,7 +6,7 @@
 #define MEMORY	1
 
 int no_of_lines; 
-byte **memory;
+byte **memory; 
 
 void line_calc(FILE *file_pointer) { 
 	int newline_count = 0;
@@ -23,16 +23,18 @@ void line_calc(FILE *file_pointer) {
 
 void init_table(FILE *file_pointer) { 
 	line_calc(file_pointer);
-	memory = (byte **)malloc(no_of_lines * sizeof(byte));
 
-	for(int i = 0; i < no_of_lines; i++) {
+	byte *temp = byter();
+	memory = malloc((sizeof(&temp) + byte_step) * no_of_lines); 
+
+	for(int i = 0; i <= no_of_lines; i++) {
 		memory[i] = NULL;
 	}
 } 
 
 void display_table() {
 	for(int i = 0; i <= no_of_lines; i++) {
-		printf("\n%c%c\n", memory[i]->a, memory[i]->b);
+		printf("%s\n", memory[i]->word);
 	}
 }
 

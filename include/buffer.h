@@ -1,42 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
 
 #ifndef BUFFER
 #define BUFFER		1
 
-typedef struct byte {
-	char a;
-	char b;
-	struct byte *next;
+int byte_step = 2;
 
+typedef struct byte { 
+	struct byte *next;
+	char word[];
 } byte;
 
 byte *head = NULL; 
 
+byte *byter() { 
+	byte *new = malloc(sizeof(*new) + byte_step);
+	return new;
+}
+
+
 void show_buffer() { 
-	byte *temp = head;
+	byte *temp = byter();
+	temp = head;
 
 	while(temp != NULL) {
-		printf("\nByte: %c%c\n", temp->a,temp->b);
+		for(int i = 0; i < byte_step; i++) {
+			if(temp->word[i] == '\0') {
+				break;
+			}
+			printf("\nByte: %c", temp->word[i]);
+		}
+		printf("\n");
 		temp = temp->next;
 	}	
 }
 
-bool add_byte(char *string) {
+bool add_byte(char *string) { 
 
-	byte *new = (byte *)malloc(sizeof(byte));
+	byte *new = byter();
 
-	new->a = string[0];
-	new->b = string[1];
-	new->next = NULL;
-
+	for (int i = 0; i < strlen(string); i++) {
+		new->word[i] = string[i];
+		new->next = NULL;
+	}
 
 	if (head == NULL) {
 		head = new;
 		return true;
 	} else {
-		byte *trav = head;
+		byte *trav = byter();
+		trav = head;
 
 		while(trav->next != NULL) {
 			trav = trav->next;
