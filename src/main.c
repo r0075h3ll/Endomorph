@@ -12,7 +12,6 @@ void main(int argc, char *argv[]) {
 			case 'i':
 				writing_to_buffer(optarg);
 				reverse_buffers();
-				display_table();
 				break;
 			case 'o':
 				output_file_pointer = fopen(optarg, "w");
