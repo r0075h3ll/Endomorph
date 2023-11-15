@@ -23,7 +23,7 @@ $ make
 | -w        | delimit output with whitespace |
 
 #### I/O Processing
-- `-b` allows you process byte stream(s) in different number systems. To process a binary file, given that 8 symbols(bits) make a byte, following command will do
+- `-b` allows you to process byte stream(s) in different number systems. To process a binary file, given that 8 symbols(bits) make a byte, following command will do
 	```
 	endomorph -b 8 -f input.txt -o output.txt
 	```
