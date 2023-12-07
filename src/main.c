@@ -7,11 +7,10 @@ void main(int argc, char *argv[]) {
 	FILE *output_file_pointer;
 	char args;
 
-	while((args = getopt(argc, argv, "i:o:b:w")) != -1) {
+	while((args = getopt(argc, argv, "f:o:b:w")) != -1) {
 		switch(args) {
-			case 'i':
+			case 'f':
 				writing_to_buffer(optarg);
-				reverse_buffers();
 				break;
 			case 'o':
 				output_file_pointer = fopen(optarg, "w");

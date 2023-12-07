@@ -8,41 +8,23 @@
 int whitespace = 0;
 int no_of_bytes = 0;
 int current_line_number;
-byte *rev_head;
 
-void reverse_buffers() { 
-	for(int i = 0; i < no_of_lines; i++) {
-		rev_head = memory[i];
+static inline void write_output(FILE *file) { 
+	byte *temp_tail;
 
-	    byte *temp = rev_head->next;
-	    rev_head->next = NULL;
-	    byte *next = NULL;
-
-	    while (temp != NULL) {
-	        next = temp->next;
-	        temp->next = rev_head;
-	        rev_head = temp;
-	        temp = next;
-
-	    }
-	    memory[i] = rev_head;
-	}
-}
-
-void write_output(FILE *file) { 
 	for(int i = 0; i <= no_of_lines; i++) {
-		rev_head = memory[i];
+		temp_tail = memory[i];
 
-		while (rev_head != NULL) {
+		while (temp_tail != NULL) {
 			for (int j = 0; j < byte_step; j++) {
-				fprintf(file, "%c", rev_head->word[j]); 
+				fprintf(file, "%c", temp_tail->word[j]); 
 			}
 
 			if(whitespace) {
 				fprintf(file, " ");
 			}
 
-			rev_head = rev_head->next;
+			temp_tail = temp_tail->next;
 		}
 		
 		fprintf(file, "\n");
@@ -50,7 +32,7 @@ void write_output(FILE *file) {
 
 }
 
-void writing_to_buffer(char *path) { 
+static inline void writing_to_buffer(char *path) { 
 
 	int index, offset = 0;
 	char ch;
@@ -82,7 +64,8 @@ void writing_to_buffer(char *path) {
 		char *string = (char *)malloc(byte_step);
 
 		if(file_content[offset] == '\n') {
-			head = NULL;
+			create_entry(current_line_number);
+			tail = NULL;
 			current_line_number++;
 			offset++;
 			continue;
@@ -92,10 +75,7 @@ void writing_to_buffer(char *path) {
 			string[i] = file_content[offset++];
 		}
 
-		if(add_byte(string)) { 
-			create_entry(current_line_number);
-		}
-
+		add_byte(string);
 	}
 
 

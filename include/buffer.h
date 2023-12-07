@@ -14,17 +14,17 @@ typedef struct byte {
 	char word[];
 } byte;
 
-byte *head = NULL; 
+byte *tail = NULL; 
 
-byte *byter() { 
+static inline byte *byter() { 
 	byte *new = malloc(sizeof(*new) + byte_step);
 	return new;
 }
 
 
-void show_buffer() { 
+static inline void show_buffer() { 
 	byte *temp = byter();
-	temp = head;
+	temp = tail;
 
 	while(temp != NULL) {
 		for(int i = 0; i < byte_step; i++) {
@@ -38,29 +38,16 @@ void show_buffer() {
 	}	
 }
 
-bool add_byte(char *string) { 
+static inline void add_byte(char *string) { 
 
 	byte *new = byter();
 
 	for (int i = 0; i < strlen(string); i++) {
 		new->word[i] = string[i];
-		new->next = NULL;
 	}
 
-	if (head == NULL) {
-		head = new;
-		return true;
-	} else {
-		byte *trav = byter();
-		trav = head;
-
-		while(trav->next != NULL) {
-			trav = trav->next;
-		}
-
-		trav->next = new;
-		return false;
-	}
+	new->next = tail;
+	tail = new;
 
 }
 

@@ -17,7 +17,7 @@ $ make
 
 | Option    | Description                    |
 | :--------- | :------------------------------ |
-| -i        | specify input file             |
+| -f        | specify input file             |
 | -o        | specify output file            |
 | -b        | specify byte step              |
 | -w        | delimit output with whitespace |

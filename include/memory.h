@@ -8,7 +8,7 @@
 int no_of_lines; 
 byte **memory; 
 
-void line_calc(FILE *file_pointer) { 
+static inline void line_calc(FILE *file_pointer) { 
 	int newline_count = 0;
 	char ch;
 
@@ -21,7 +21,7 @@ void line_calc(FILE *file_pointer) {
 	no_of_lines = newline_count;
 }
 
-void init_table(FILE *file_pointer) { 
+static inline void init_table(FILE *file_pointer) { 
 	line_calc(file_pointer);
 
 	byte *temp = byter();
@@ -32,17 +32,17 @@ void init_table(FILE *file_pointer) {
 	}
 } 
 
-void display_table() {
+static inline void display_table() {
 	for(int i = 0; i <= no_of_lines; i++) {
 		printf("%s\n", memory[i]->word);
 	}
 }
 
-void create_entry(int current_line_number) {
+static inline void create_entry(int current_line_number) {
 	int index = current_line_number;
 
 	if (memory[index] == NULL) {
-		memory[index] = head;
+		memory[index] = tail; //Modified
 	} else {
 		create_entry(current_line_number);
 	}
